@@ -7,6 +7,7 @@ const RateLimit = require('express-rate-limit');
 const cors = require('cors');
 const eventRoutes = require('./routes/eventRoutes.js');
 const workshopRoutes = require('./routes/workshopRoutes.js');
+const reservationRoutes = require('./routes/reservationRoutes.js');
 
 app.get('/', (req, res) => {
     res.send('API is running...');
@@ -20,8 +21,12 @@ const limit = RateLimit({
 app.use(helmet());
 app.use(express.json({ limit: '10kb' })); // Body limit is 10
 app.use(cors());
+
+
 app.use('/api/events', limit, eventRoutes);
 app.use('/api/workshops', limit, workshopRoutes);
+app.use('/api/reservations', limit, reservationRoutes);
+
 app.use(notFound);
 app.use(errorHandler);
 
