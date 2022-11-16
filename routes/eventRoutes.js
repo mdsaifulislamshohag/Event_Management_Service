@@ -52,6 +52,7 @@ router.get(
     })
 );
 
+
 const paginatedResults = (model, page,limit) => {
     const pagination = {};
     pagination.total = model[0].total_product
