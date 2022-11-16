@@ -46,4 +46,5 @@ const paginatedResults = (model, page,limit) => {
     
 };
 
+
 module.exports = router;
