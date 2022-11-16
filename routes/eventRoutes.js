@@ -20,7 +20,7 @@ router.get(
             .then(([rows, fieldData]) => {
                 if(rows.length==0){
                     res.status(404).json({code:404,msg:"No events found in this page. Please sesrch in other pages"});
-                }else{res.status(200).json({code:404,msg: paginatedResults(rows, page,limit)});}
+                }else{res.status(200).json({code:200,msg: paginatedResults(rows, page,limit)});}
                  
             })
             .catch(err => {
