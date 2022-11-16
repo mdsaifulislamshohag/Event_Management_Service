@@ -12,6 +12,7 @@ const reservationRoutes = require('./routes/reservationRoutes.js');
 app.get('/', (req, res) => {
     res.send('API is running...');
 });
+// IMPLEMENTED SOME OF APIs SECURITY STEPS FROM HERE
 const limit = RateLimit({
     max: 100, // max requests
     windowMs: 1000, // per second
@@ -22,11 +23,12 @@ app.use(helmet());
 app.use(express.json({ limit: '10kb' })); // Body limit is 10
 app.use(cors());
 
-
+// DEFINE ROUTING FILES
 app.use('/api/events', limit, eventRoutes);
 app.use('/api/workshops', limit, workshopRoutes);
 app.use('/api/reservations', limit, reservationRoutes);
 
+// DEFINE MIDDLEWARE ROUTES
 app.use(notFound);
 app.use(errorHandler);
 
