@@ -29,6 +29,29 @@ router.get(
     })
 );
 
+// @description  Fetch event details
+// @route        GET /api/events/:id
+// @access       Public
+router.get(
+    '/:id',
+    asyncHandler(async (req, res) => {
+        const event_id = req.params.id;
+        db
+            .execute(
+                `SELECT id,title,start_at,end_at,(SELECT count(*) FROM workshops where event_id = ${event_id}) total_workshop FROM events where id =${event_id}`
+            )
+            .then(([rows, fieldData]) => {
+                if(rows.length==0){
+                    res.status(404).json({code:404,msg:"No events found with this Id"});
+                }else{res.status(200).json({code:200,msg: "ok",data:rows});}
+                 
+            })
+            .catch(err => {
+                res.status(500).json({ msg: 'Server Error' });
+            });
+    })
+);
+
 const paginatedResults = (model, page,limit) => {
     const pagination = {};
     pagination.total = model[0].total_product
