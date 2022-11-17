@@ -5,7 +5,7 @@
 
 * npm install
 * npm start
-* visit `http://localhost:5000`
+* visit `http://localhost:5000/api/`
  
 
 ## Sweggar API Documentation
