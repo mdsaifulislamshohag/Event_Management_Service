@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  
   "scripts": {
     "start": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -31,6 +30,8 @@
     "lodash-contrib": "^4.1200.1",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.20",
-    "require": "^2.4.20"
+    "require": "^2.4.20",
+    "swagger-ui-express": "^4.6.0",
+    "yamljs": "^0.3.0"
   }
 }

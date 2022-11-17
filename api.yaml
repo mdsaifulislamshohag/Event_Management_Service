@@ -1,0 +1,148 @@
+swagger: "2.0"
+info:
+  title: Event Management Service
+  description: Event Management Service-API Documentation.
+  version: 1.0
+  liscence:
+    name: Apache 2.0
+    url: "http://www.apache.org/liscences/LIS"
+  servers:
+    -url: http://localhost:5000
+    description: THis is my local Server
+
+schemes: [http]
+
+
+#Return data From get request
+paths:
+ 
+#Get Event List 
+  /api/events:
+    get:
+      tags:
+        - Event
+      summary: Get Event List 
+      description: Get Event List 
+      parameters:  
+
+        - in: query
+          name: page
+          type: integer
+        
+        - in: query
+          name: limit
+          type: integer
+
+        
+      responses:
+        200:    # status code
+          description: ok
+          schema: 
+            type: object
+            example: { "code": 200, "msg": "ok", "data": { "events": [ { "id": 2, "title": "Demo Event2", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 3, "title": "Demo Event3", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 4, "title": "Demo Event4", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 5, "title": "Demo Event5", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 6, "title": "Demo Event6", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 7, "title": "Demo Event7", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 8, "title": "Demo Event8", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 9, "title": "Demo Event9", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 10, "title": "Demo Event10", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 11, "title": "Demo Event11", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" } ], "pagination": { "total": 31, "per_page": 10, "total_pages": 4, "current_page": 1 } } }
+
+
+#Get Event Details 
+  /api/events/{id}:
+    get:
+      tags:
+        - Event
+      summary: Get Event Details 
+      description: Get Event Details 
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+      responses:
+        200:    # status code
+          description: ok
+          schema: 
+            type: object
+            example: { "code": 200, "msg": "ok", "data": [ { "id": 1, "title": "Demo Event1", "start_at": "2022-10-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z", "total_workshop": 5 } ] }
+
+
+#Get Workshop List
+  /api/workshops/{id}:
+    get:
+      tags:
+        - Event
+      summary: Get Workshop List
+      description: Get Workshop List
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+      responses:
+        200:    # status code
+          description: ok
+          schema: 
+            type: object
+            example: { "code": 200, "msg": "ok", "data": { "id": 1, "title": "Demo Event1", "start_at": "2022-10-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z", "workshops": [ { "id": 1, "title": "Demo Workshop 1", "description": "Demo Workshop Description 1", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 2, "title": "Demo Workshop 2", "description": "Demo Workshop Description 2", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 3, "title": "Demo Workshop 3", "description": "Demo Workshop Description 3", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 4, "title": "Demo Workshop 4", "description": "Demo Workshop Description 4", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, { "id": 5, "title": "Demo Workshop 5", "description": "Demo Workshop Description 5", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" } ] } }
+
+
+#Get Workshop Details
+  /api/workshops/detail/{id}:
+    get:
+      tags:
+        - Event
+      summary: Get Workshop Details
+      description: Get Workshop Details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+      responses:
+        200:    # status code
+          description: ok
+          schema: 
+            type: object
+            example: { "code": 200, "msg": "ok", "data": { "id": 2, "title": "Demo Workshop 2", "description": "Demo Workshop Description 2", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z", "total_reservations": 2 } }
+
+
+#Get workshop reservation information by user email
+  /api/reservations:
+    get:
+      tags:
+        - Event
+      summary: Get workshop reservation information by user email
+      description: Get workshop reservation information by user email
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+           $ref: "#/components/schemas/Reservatio"
+
+
+      responses:
+        200:    # status code
+          description: ok
+          schema: 
+            type: object
+            example: { "code": 200, "msg": "ok", "data": { "reservation": { "id": 4, "name": "User Name 4", "email": "username4@gmail.com" }, "event": { "id": 5, "title": "Demo Event5", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" }, "workshop": { "id": 15, "title": "Demo Workshop 15", "description": "Demo Workshop Description 15", "start_at": "2022-12-25T03:26:16.000Z", "end_at": "2022-12-25T03:26:16.000Z" } } }
+
+
+components:
+  schemas:
+    Reservatio:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+        email:
+          type: email
+       
+
+ 
